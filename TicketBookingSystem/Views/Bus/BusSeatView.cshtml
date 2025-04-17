@@ -1,0 +1,63 @@
+﻿@model TicketBookingSystem.Models.Bus
+@{
+    ViewData["Title"] = "Select a Seat";
+    var userId = Context.Session.GetString("UserId");
+}
+
+<h3 class="text-center">Select a Seat for @Model.BusName</h3>
+
+@if (!string.IsNullOrEmpty(TempData["Error"] as string))
+{
+    <div class="alert alert-danger text-center">@TempData["Error"]</div>
+}
+
+<div class="d-flex justify-content-center">
+    <div class="busTicket p-3 me-2">
+        <img src="~/image/bus-ticket.png" alt="Banner" style="width:100%; height:300px;" />
+
+    </div>
+    <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+        <form id="seatForm" method="post" asp-action="BookSeat" asp-controller="Bus">
+            <input type="hidden" name="BusId" value="@Model.BusId" />
+            <input type="hidden" name="SeatNumber" id="selectedSeatNumber" />
+
+            <div class="d-flex flex-column align-items-center mt-4">
+                @for (int i = 0; i < Model.Seats.Count; i++)
+                {
+                    <div class="d-flex mb-2">
+                        @for (int j = 0; j < Model.Seats[i].Count; j++)
+                        {
+                            var seat = Model.Seats[i][j];
+                            var seatNumber = $"{(char)('A' + i)}{j + 1}";
+                            var isBooked = seat == "X";
+
+                            <button type="button"
+                                    class="btn btn-sm mx-1 @(isBooked ? "btn-danger" : "btn-outline-primary")"
+                            @(isBooked ? "disabled" : "")
+                                    onclick="submitSeat('@seatNumber')">
+                                @seatNumber
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        </form>
+</div>
+</div>
+
+<div class="text-center mt-2">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Search Again</a>
+</div>
+
+<script>
+    function submitSeat(seatNumber) {
+        const confirmed = confirm("Are You Sure You want to Buy this ticket ?");
+        if (confirmed) {
+            document.getElementById("selectedSeatNumber").value = seatNumber;
+            document.getElementById("seatForm").submit();
+            alert("Successfully Bought the ticket!");
+        } else {
+            // Do nothing, user canceled
+        }
+    }
+</script>

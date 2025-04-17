@@ -1,0 +1,99 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<Bus>
+@{
+    ViewData["Title"] = "Bus Management";
+}
+
+
+<div class="container mt-4">
+
+
+    <h2 class="text-center">Bus List</h2>
+    <div class="d-flex justify-content-between m-3">
+        <!-- Button to Open Modal -->
+        <a asp-controller="Admin" asp-action="AdminDashBoard" class="btn btn-secondary">Back to Dashboard</a>
+       
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addBusModal">
+                + Add Bus
+            </button>
+       
+        <!-- Back to Admin Dashboard -->
+    
+    </div>
+
+
+    <!-- Bus Table -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Bus Name</th>
+                <th>Model</th>
+                <th>Time</th>
+                <th>Starting Point</th>
+                <th>Ending Point</th>
+                <th>Price</th>
+                <th>Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var bus in Model)
+            {
+                <tr>
+                    <td>@bus.BusName</td>
+                    <td>@bus.Model</td>
+                    <td>@bus.Time.ToString("hh:mm tt")</td>
+                    <td>@bus.StartingPoint</td>
+                    <td>@bus.EndingPoint</td>
+                    <td>$@bus.Price</td>
+                    <td>
+                        <a asp-controller="Bus" asp-action="UpdateBus" asp-route-id="@bus.BusId" class="btn btn-primary">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Add Bus Modal -->
+    <div class="modal fade" id="addBusModal" tabindex="-1" aria-labelledby="addBusModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addBusModalLabel">Add New Bus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="AddBus" asp-controller="Bus" method="post">
+                        <div class="mb-3">
+                            <label>Bus Name</label>
+                            <input name="BusName" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Model</label>
+                            <input name="Model" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Time</label>
+                            <input type="datetime-local" name="Time" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Starting Point</label>
+                            <input name="StartingPoint" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Ending Point</label>
+                            <input name="EndingPoint" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label>Price</label>
+                            <input type="number" step="0.01" name="Price" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-success">Save Bus</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

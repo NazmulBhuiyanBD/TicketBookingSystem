@@ -1,0 +1,45 @@
+﻿@model List<Bus>
+
+<div class="container mt-5">
+     <h2 class="text-center">Available Buses</h2>
+       
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-info text-center">@ViewBag.Message</div>
+    }
+
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Bus Name</th>
+                    <th>Model</th>
+                    <th>Time</th>
+                    <th>Starting Point</th>
+                    <th>Ending Point</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var bus in Model)
+                {
+                    <tr>
+                        <td>@bus.BusName</td>
+                        <td>@bus.Model</td>
+                        <td>@bus.Time.ToString("yyyy-MM-dd hh:mm tt")</td>
+                        <td>@bus.StartingPoint</td>
+                        <td>@bus.EndingPoint</td>
+                        <td>$@bus.Price</td>
+                        <td>
+                            <a asp-controller="Bus" asp-action="BusSeatView" asp-route-id="@bus.BusId" class="btn btn-success">Book</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    <div class="text-center mt-2"><a asp-controller="Home" asp-action="Index" class="btn btn-primary">Search Again</a></div>
+</div>

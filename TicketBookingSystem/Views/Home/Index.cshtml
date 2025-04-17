@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Online Ticket Booking";
+}
+
+
+<div class="container mt-5 p-3 rounded-2 homeBackground">
+    <h2 class="text-center text-white m-3">Select Your Bus Destination</h2>
+
+    <form method="post" asp-action="SearchBus" asp-controller="Home" class="p-4 border rounded shadow bg-white">
+        <div class="row">
+            <!-- Going From -->
+            <div class="col-md-5">
+                <label for="start" class="form-label">Going From</label>
+                <input type="text" id="start" name="StartPoint" class="form-control" placeholder="Enter starting location" required />
+            </div>
+
+            <!-- Swap Button -->
+            <div class="col-md-2 text-center d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-light border" onclick="swapValues()">
+                    <span class="material-symbols-outlined">
+                        swap_horiz
+                    </span>
+                </button>
+            </div>
+
+            <!-- Going To -->
+            <div class="col-md-5">
+                <label for="end" class="form-label">Going To</label>
+                <input type="text" id="end" name="EndPoint" class="form-control" placeholder="Enter destination" required />
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-center m-3">
+            <button type="submit" class="btn btn-primary">Search Bus</button>
+        </div>
+    </form>
+
+    <!-- Display Search Result -->
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-info mt-3 text-center">@ViewBag.Message</div>
+    }
+</div>
+
+<!-- JavaScript to Swap Values -->
+<script>
+    function swapValues() {
+        let start = document.getElementById("start");
+        let end = document.getElementById("end");
+        let temp = start.value;
+        start.value = end.value;
+        end.value = temp;
+    }
+</script>

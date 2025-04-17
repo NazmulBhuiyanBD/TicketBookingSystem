@@ -1,0 +1,45 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Signup";
+}
+
+<div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h2 class="text-center">Sign up</h2>
+    <form asp-action="Signup" method="post">
+        <div class="mb-3">
+            <label>Username</label>
+            <input asp-for="UserName" class="form-control" required />
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input asp-for="Password" type="password" class="form-control" required />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Full Name</label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Phone</label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Signup</button>
+    </form>
+
+    <p class="mt-3">
+        Already have an account?
+        <a asp-action="Login" class="btn btn-link">Login</a>
+    </p>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+</div>

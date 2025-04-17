@@ -1,0 +1,60 @@
+﻿@model TicketBookingSystem.ViewModels.UserDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h2 class="text-center">User Dashboard</h2>
+
+   <div class="d-flex justify-content-between">
+        <div class="card mt-3 ">
+            <div class="card-body m-4">
+                <h4 class="card-title">Welcome, @Model.User.FullName!</h4>
+                <p><strong>Username:</strong> @Model.User.UserName</p>
+                <p><strong>Phone:</strong> @Model.User.Phone</p>
+                <p><strong>User ID:</strong> @Model.User.UserId</p>
+
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body m-4">
+                <h4 class="card-title">Your Tickets</h4>
+                <div class ="scrollable-table">
+                    @if (Model.Tickets != null && Model.Tickets.Any())
+                    {
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Bus</th>
+                                    <th>Seat</th>
+                                    <th>Booking Date</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ticket in Model.Tickets)
+                                {
+                                    <tr>
+                                        <td>@ticket.Bus?.BusName</td>
+                                        <td>@ticket.SeatNumber</td>
+                                        <td>@ticket.BookingDate.ToString("dd MMM yyyy")</td>
+                                        <td>@ticket.Price.ToString("C")</td>
+                                        @* <td><button class="btn btn-danger">Cancel</button></td> *@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>You haven't booked any tickets yet.</p>
+                    }
+                </div>
+
+               
+
+            </div>
+        </div>
+   </div>
+
+</div>
