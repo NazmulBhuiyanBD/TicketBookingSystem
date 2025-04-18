@@ -1,5 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<TicketBookingSystem.Models.User>
 @{
+    ViewData["Title"] = "All Users";
 }
+<div class="container mt-4">
+    <h2 class="text-center">Registered Users</h2>
+    <table class="table table-bordered table-striped mt-3">
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Username</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@user.FullName</td>
+                    <td>@user.Phone</td>
+                    <td>@user.UserName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="text-center mt-3">
+        <a asp-action="AdminDashBoard" asp-controller="Admin" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+</div>

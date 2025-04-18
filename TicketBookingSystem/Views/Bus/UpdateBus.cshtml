@@ -7,50 +7,52 @@
 <div class="container mt-4">
     <h2 class="text-center">Edit Bus - @Model.BusName</h2>
 
-    <form asp-action="UpdateBus" asp-controller="Bus" method="post">
-        @Html.AntiForgeryToken()
+    <div class="shadow-lg p-5 mb-5 bg-body-tertiary rounded">
+        <form asp-action="UpdateBus" asp-controller="Bus" method="post">
+            @Html.AntiForgeryToken()
 
-        <input type="hidden" asp-for="BusId" />
+            <input type="hidden" asp-for="BusId" />
 
-        <div class="mb-3">
-            <label class="form-label">Bus Name</label>
-            <input asp-for="BusName" class="form-control" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Bus Name</label>
+                <input asp-for="BusName" class="form-control" required />
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Model</label>
-            <input asp-for="Model" class="form-control" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Model</label>
+                <input asp-for="Model" class="form-control" required />
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Time</label>
-            <input asp-for="Time" type="datetime-local" class="form-control"
-                   value="@Model.Time.ToString("yyyy-MM-ddTHH:mm")" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Time</label>
+                <input asp-for="Time" type="datetime-local" class="form-control"
+                       value="@Model.Time.ToString("yyyy-MM-ddTHH:mm")" required />
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Starting Point</label>
-            <input asp-for="StartingPoint" class="form-control" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Starting Point</label>
+                <input asp-for="StartingPoint" class="form-control" required />
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Ending Point</label>
-            <input asp-for="EndingPoint" class="form-control" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Ending Point</label>
+                <input asp-for="EndingPoint" class="form-control" required />
+            </div>
 
-        <div class="mb-3">
-            <label class="form-label">Price</label>
-            <input asp-for="Price" type="number" step="0.01" class="form-control" required />
-        </div>
+            <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input asp-for="Price" type="number" step="0.01" class="form-control" required />
+            </div>
 
-        <button type="submit" class="btn btn-success">Update Bus</button>
-        <a asp-action="Index" asp-controller="Bus" class="btn btn-secondary ms-2">Cancel</a>
-    <form asp-action="DeleteBus" method="post" class="d-inline">
-        <input type="hidden" name="id" value="@Model.BusId" />
-        <button type="submit" class="btn btn-danger ms-2"
-                onclick="return confirm('Are you sure you want to delete this bus?')">
-            Delete
-        </button>
-    </form>
-    </form>
+            <button type="submit" class="btn btn-success">Update Bus</button>
+            <a asp-action="Index" asp-controller="Bus" class="btn btn-secondary ms-2">Cancel</a>
+            <form asp-action="DeleteBus" method="post" class="d-inline">
+                <input type="hidden" name="id" value="@Model.BusId" />
+                <button type="submit" class="btn btn-danger ms-2"
+                        onclick="return confirm('Are you sure you want to delete this bus?')">
+                    Delete
+                </button>
+            </form>
+        </form>
+   </div>
 </div>
